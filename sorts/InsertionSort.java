@@ -1,4 +1,6 @@
-public class InsertionSort { 
+package sorts;
+
+public class InsertionSort {
 	public static void main(String[] args){
 		int[] array = {6,3,8,4,1,2,9,7,5};
 		
