@@ -37,10 +37,10 @@ public class MergeSort{
         }
         mergeSort(leftArray);
         mergeSort(rightArray);
-        merge(leftArray, rightArray, array);
+        mergeArrays(leftArray, rightArray, array);
     }
 
-    private static void merge(int[] leftArray, int[] rightArray, int[] array) {
+    private static void merge(int[] leftArray, int[] rightArray, int[] array) { //while loop variation
 
         int leftSize = array.length / 2;
         int rightSize = array.length - leftSize;
@@ -68,5 +68,33 @@ public class MergeSort{
             i++;
             r++;
         }
+    }
+
+    public static void mergeArrays(int[] leftArray, int[] rightArray, int[] array){ //for loop variation
+        int temp;
+        int l=0, r=0;
+        int i = 0;
+        int leftSize = array.length/2;
+        int rightSize = array.length - leftSize;
+        for(; l < leftSize && r < rightSize; i++){
+            if(leftArray[l] < rightArray[r]){
+                array[i] = leftArray[l];
+                l++;
+            } else if(leftArray[l] > rightArray[r]){
+                array[i] = rightArray[r];
+                r++;
+            }
+        }
+
+        while(l < leftSize) {
+            array[i] = leftArray[l];
+            i++;
+            l++;
+        }
+        while(r < rightSize) {
+            array[i] = rightArray[r];
+            i++;
+            r++;
+        }  
     }
 }
