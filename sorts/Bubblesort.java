@@ -11,14 +11,16 @@ public class Bubblesort{
     public static void bubblesort(int[] array){
         int temp;
         for(int i = 0; i < array.length; i++){
+            int iteration = i+1;
+            System.out.println("Iteration: " + iteration);
             for(int j = 0; j < array.length-1;j++){
                 if(array[j] > array[j+1]){
                     temp = array[j];
                     array[j] = array[j+1];
                     array[j+1] = temp;
                 } 
+                printArray(array);
             }
-            printArray(array);
         }
     }
 

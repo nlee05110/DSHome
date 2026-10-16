@@ -15,6 +15,7 @@ public class MergeSort{
     }
 
     private static void mergeSort(int[] array) {
+        
 
         int length = array.length;
         if (length <= 1) return; 

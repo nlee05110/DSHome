@@ -15,22 +15,23 @@ public class SelectionSort{
 	
 	public static void selectionSort(int[] arr){
 		int temp;
-		int index = 0; 
+        
+		int  minIndexJ = 0; 
 		for(int i=0; i < arr.length-1; i++){
 			int  min = arr[i];
 			for(int j = i; j < arr.length; j++){
-				if(min > arr[j]){
-					index = j;
+				if(min < arr[j]){
+					minIndexJ = j;
 					min = arr[j];
 				}
+			    printArr(arr);
 			}
-			if(min  == arr[index]){
+			if(min  == arr[minIndexJ]){
 				temp = arr[i];
 				arr[i] = min;
-				arr[index] = temp;
+				arr[minIndexJ] = temp;
 			}	
 			
-			printArr(arr);
 			
 
 		}
