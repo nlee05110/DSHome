@@ -47,21 +47,20 @@ public class Exam2 {
 		int index,pass, temp;
 		int comparisons=0;
 		
-		for(pass=0;pass<array.length-1;pass++) {
-            if(array[pass]>array[pass+1]){
-                
-                for(index=0;index<array.length-1;index++) {
-                    comparisons++;
-                    if(array[index]>array[index+1]) {
-                        temp=array[index];
-                        array[index]=array[index+1];
-                        array[index+1]=temp;
-                    }
+		for(pass=0;pass<array.length;pass++) {
+            boolean noSwap = true; 
+            for(index=0;index<array.length-1;index++) {
+                comparisons++;
+                if(array[index]>array[index+1]) {
+                    temp=array[index];
+                    array[index]=array[index+1];
+                    array[index+1]=temp;
+                    noSwap = false;
                 }
-                pass=-1;
+	    
             }
-            showArray(array);
-	    }
+            if(noSwap) break;
+        }
 		
 		return comparisons;
 	}
