@@ -28,12 +28,20 @@ public class BinarySearchTree {
 	}
 	
 	//****** SEARCH ***************************
-	public Node search(int key) {
-		Node node = search(this.root,key);
+	public Node search(int value) {
+		Node node = search(this.root,value);
 		return node;
 	}
 	
-	private Node search(Node current, int key){
+	private Node search(Node current, int value){
+        System.out.printf("%s\n",current);
+        if(value==current.key) {
+            return current;
+        } else if(value<current.key){ 
+            return search(current.left, value);
+        } else if(value>current.key ){
+            return search(current.right, value);
+        }
 		return null;
 	}
 	
@@ -43,6 +51,7 @@ public class BinarySearchTree {
 	}
 	
 	private Node delete(Node current, int key){
+        
 		return null;
 	}
 	

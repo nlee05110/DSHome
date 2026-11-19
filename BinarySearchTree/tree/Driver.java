@@ -19,6 +19,7 @@ public class Driver {
 		System.out.println();
 		tree.postOrderTraversal(tree.root);
 		System.out.println();
+        System.out.printf("Search: %s\n",tree.search(15));
 		
 	}
 
