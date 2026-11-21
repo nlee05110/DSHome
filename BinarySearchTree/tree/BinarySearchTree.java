@@ -50,8 +50,17 @@ public class BinarySearchTree {
 		this.root = delete(this.root,key);
 	}
 	
-	private Node delete(Node current, int key){
-        
+	private Node delete(Node current, int value){
+        System.out.printf("%s ",current.right.left.key);
+        if(current.right.key == value){
+            current.right.left = current.right.right;
+            current.right = current.right.left;
+            return current;
+        } else if(value<current.key){
+            return delete(current.left, value);
+        } else if(value>current.key){
+            return delete(current.right,value);
+        }
 		return null;
 	}
 	

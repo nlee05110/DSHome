@@ -20,7 +20,9 @@ public class Driver {
 		tree.postOrderTraversal(tree.root);
 		System.out.println();
         System.out.printf("Search: %s\n",tree.search(15));
-		
+        tree.delete(15);
+		tree.inOrderTraversal(tree.root);
+		System.out.println();
 	}
 
 }
