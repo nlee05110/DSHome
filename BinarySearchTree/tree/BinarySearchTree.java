@@ -34,8 +34,8 @@ public class BinarySearchTree {
 	}
 	
 	private Node search(Node current, int value){
-        System.out.printf("%s\n",current);
         if(value==current.key) {
+            System.out.printf("Value Found: %s\n", current.key);
             return current;
         } else if(value<current.key){ 
             return search(current.left, value);
@@ -47,14 +47,37 @@ public class BinarySearchTree {
 	
 	//****** DELETE ***************************
 	public void delete(int key) {
-		this.root = delete(this.root,key);
+		delete(this.root,key); //Deleted this.root = 
 	}
 	
 	private Node delete(Node current, int value){
-        System.out.printf("%s ",current.right.left.key);
         if(current.right.key == value){
-            current.right.left = current.right.right;
-            current.right = current.right.left;
+            if(hasChildren(current.right)){
+                if(hasLeftChild(current.right)){
+                    Node temp = current.right.left;    
+                    current.right = current.right.right;
+                    current.right.left = temp;
+                } else {
+                    current.right = current.right.right;
+                }
+            } else {
+                current.right = null;
+            }
+            return current;
+       } 
+        if(current.left.key == value){
+            if(hasChildren(current.left)){
+                if(hasRightChild(current.left)){
+                    Node temp = current.left.right;    
+                    current.left = current.left.left;
+                    current.left.right = temp;
+                } else {
+                    current.left = current.left.left;
+                }
+            } else {
+                current.left = null;
+            }
+                
             return current;
         } else if(value<current.key){
             return delete(current.left, value);
@@ -103,6 +126,27 @@ public class BinarySearchTree {
 			preOrderTraversal(root.right);
 		}
 	}
+
+    public boolean hasChildren(Node current){
+        if(current.right!=null||current.left!=null){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean hasLeftChild(Node current){
+        if(current.left!=null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasRightChild(Node current){
+        if(current.right!=null){
+            return true;
+        }
+        return false;
+    }
 	
 	public void postOrderTraversal(Node root) {
 		// Left-Right-Root
