@@ -34,6 +34,9 @@ public class BinarySearchTree {
 	}
 	
 	private Node search(Node current, int value){
+        if(current==null){
+            return current;
+        }
         if(value==current.key) {
             System.out.printf("Value Found: %s\n", current.key);
             return current;
@@ -53,13 +56,7 @@ public class BinarySearchTree {
 	private Node delete(Node current, int value){
         if(current.right.key == value){
             if(hasChildren(current.right)){
-                if(hasLeftChild(current.right)){
-                    Node temp = current.right.left;    
-                    current.right = current.right.right;
-                    current.right.left = temp;
-                } else {
-                    current.right = current.right.right;
-                }
+                deleteRightChild(current); 
             } else {
                 current.right = null;
             }
@@ -67,13 +64,7 @@ public class BinarySearchTree {
        } 
         if(current.left.key == value){
             if(hasChildren(current.left)){
-                if(hasRightChild(current.left)){
-                    Node temp = current.left.right;    
-                    current.left = current.left.left;
-                    current.left.right = temp;
-                } else {
-                    current.left = current.left.left;
-                }
+                deleteLeftChild(current);
             } else {
                 current.left = null;
             }
@@ -87,10 +78,38 @@ public class BinarySearchTree {
 		return null;
 	}
 	
+    public void deleteLeftChild(Node current) {
+        
+        if(hasRightChild(current.left)){
+            Node temp = current.left.right;    
+            current.left = current.left.left;
+            current.left.right = temp;
+        } else {
+            current.left = current.left.left;
+        }
+
+    }    
+    public void deleteRightChild(Node current) {
+        if(hasLeftChild(current.right)){
+            Node temp = current.right.left;    
+            current.right = current.right.right;
+            current.right.left = temp;
+        } else {
+            current.right = current.right.right;
+        }
+        
+    }
 	
+	public int findMin() {
+        return findMin(this.root);
+	}
 	//****** Find Minimum Key Value ***************************
 	public int findMin(Node node) {
-		return 0;
+        if(node.left==null){
+            return node.key;
+        } else {
+            return findMin(node.left);
+        }
 	}
 	
 	//****** Height (Count in Nodes) ***************************
