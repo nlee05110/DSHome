@@ -13,6 +13,15 @@ public class Driver {
 		tree.insert(8);
 		tree.insert(2);
 		tree.insert(17);
+		tree.insert(7);
+		tree.insert(9);
+		tree.insert(11);
+		tree.insert(13);
+		tree.insert(16);
+		tree.insert(18);
+		tree.insert(19);
+		tree.insert(14);
+		tree.insert(1);
 		
 		tree.inOrderTraversal(tree.root);
 		System.out.println();
@@ -20,14 +29,22 @@ public class Driver {
 		System.out.println();
 		tree.postOrderTraversal(tree.root);
 		System.out.println();
+        System.out.printf("Leaves: %d\n",tree.getLeaves());
         System.out.printf("Search: %s\n",tree.search(15));
         System.out.printf("Minimum Value: %d\n",tree.findMin());
         int deletedVal = deleteVal(tree);
         System.out.printf("Deleted Value: %d\n", deletedVal);
         tree.delete(deletedVal);
+        System.out.printf("Search: %s\n",tree.search(17));
 		tree.inOrderTraversal(tree.root);
 		System.out.println();
 		tree.postOrderTraversal(tree.root);
+		System.out.println();
+        deletedVal = deleteVal(tree);
+        System.out.printf("Deleted Value: %d\n", deletedVal);
+        tree.delete(deletedVal);
+        System.out.printf("Leaves: %d\n",tree.getLeaves());
+		tree.preOrderTraversal(tree.root);
 		System.out.println();
 	}
 

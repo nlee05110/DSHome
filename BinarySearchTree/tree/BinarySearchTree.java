@@ -2,6 +2,8 @@ package tree;
 
 public class BinarySearchTree {
 	Node root;
+    int leaves;
+
 	
 	public BinarySearchTree() {
 		this.root=null;
@@ -54,7 +56,7 @@ public class BinarySearchTree {
 	}
 	
 	private Node delete(Node current, int value){
-        if(current.right.key == value){
+        if(current.right!=null && value == current.right.key)  {
             if(hasChildren(current.right)){
                 deleteRightChild(current); 
             } else {
@@ -62,7 +64,7 @@ public class BinarySearchTree {
             }
             return current;
        } 
-        if(current.left.key == value){
+        if(current.left!=null && value == current.left.key){
             if(hasChildren(current.left)){
                 deleteLeftChild(current);
             } else {
@@ -80,24 +82,26 @@ public class BinarySearchTree {
 	
     public void deleteLeftChild(Node current) {
         
-        if(hasRightChild(current.left)){
+        if(hasLeftChild(current.left)&&hasRightChild(current.left)){
             Node temp = current.left.right;    
             current.left = current.left.left;
             current.left.right = temp;
-        } else {
-            current.left = current.left.left;
-        }
-
+        } else if(hasLeftChild(current.left)&&!hasRightChild(current.left)){
+            current.left = current.left.left;    
+        } else if(!hasLeftChild(current.left)&&hasRightChild(current.left)){
+            current.left = current.left.right;    
+        } 
     }    
     public void deleteRightChild(Node current) {
-        if(hasLeftChild(current.right)){
+        if(hasLeftChild(current.right)&&hasRightChild(current.right)){
             Node temp = current.right.left;    
             current.right = current.right.right;
             current.right.left = temp;
-        } else {
-            current.right = current.right.right;
-        }
-        
+        } else if(hasLeftChild(current.right)&&!hasRightChild(current.right)){
+            current.right = current.right.left;    
+        } else if(!hasLeftChild(current.right)&&hasRightChild(current.right)){
+            current.right = current.right.right;    
+        }        
     }
 	
 	public int findMin() {
@@ -118,8 +122,18 @@ public class BinarySearchTree {
     }
     
     //****** Count Leaves ***************************
+    public int getLeaves(){
+        leaves = countLeaves(root);
+        return leaves;
+    }
 	public int countLeaves(Node root) {
-		return 0;
+        if(root.left!=null&&root.right!=null){
+            countLeaves(root.left);
+            countLeaves(root.right);
+        } else {
+            leaves +=1;
+        }
+		return leaves;
 	}
 	
 	//****** isValidBST ***************************
@@ -140,7 +154,15 @@ public class BinarySearchTree {
 	public void preOrderTraversal(Node root) {
 		// Root-Left-Right
 		if(root!=null) {
-			System.out.printf(" %d ", root.key);
+            if(hasChildren(root)&&hasRightChild(root)&&hasLeftChild(root)){
+			    System.out.printf("VAL: %d LEFT: %d RIGHT: %d\n", root.key, root.left.key, root.right.key);
+            }else if(hasRightChild(root)){
+			    System.out.printf("VAL: %d LEFT: NULL RIGHT: %d\n", root.key, root.right.key);
+            }else if(hasLeftChild(root)){
+			    System.out.printf("VAL: %d LEFT: %d RIGHT: NULL\n", root.key, root.left.key);
+            } else {
+			    System.out.printf("VAL: %d LEFT: NULL RIGHT: NULL\n", root.key);
+            }
 			preOrderTraversal(root.left);
 			preOrderTraversal(root.right);
 		}
