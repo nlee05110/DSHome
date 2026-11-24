@@ -3,7 +3,7 @@ package tree;
 public class BinarySearchTree {
 	Node root;
     int leaves;
-
+    int height;
 	
 	public BinarySearchTree() {
 		this.root=null;
@@ -83,9 +83,14 @@ public class BinarySearchTree {
     public void deleteLeftChild(Node current) {
         
         if(hasLeftChild(current.left)&&hasRightChild(current.left)){
-            Node temp = current.left.right;    
-            current.left = current.left.left;
-            current.left.right = temp;
+            Node temp = current.left.left;    
+            current.left = current.left.right;
+            if(hasChildren(current.left)){
+                Node lowestLeftNode = lowestLeftNode(current.left);
+                lowestLeftNode.left = temp;
+                return;
+            }
+            current.left.left = temp;
         } else if(hasLeftChild(current.left)&&!hasRightChild(current.left)){
             current.left = current.left.left;    
         } else if(!hasLeftChild(current.left)&&hasRightChild(current.left)){
@@ -96,6 +101,11 @@ public class BinarySearchTree {
         if(hasLeftChild(current.right)&&hasRightChild(current.right)){
             Node temp = current.right.left;    
             current.right = current.right.right;
+            if(hasLeftChild(current.right)){
+                Node lowestLeftNode = lowestLeftNode(current.right);
+                lowestLeftNode.left = temp;
+                return;
+            }
             current.right.left = temp;
         } else if(hasLeftChild(current.right)&&!hasRightChild(current.right)){
             current.right = current.right.left;    
@@ -167,6 +177,12 @@ public class BinarySearchTree {
 			preOrderTraversal(root.right);
 		}
 	}
+    public Node lowestLeftNode(Node current){
+        if(current.left==null){
+            return current;
+        }
+        return lowestLeftNode(current.left);
+    }
 
     public boolean hasChildren(Node current){
         if(current.right!=null||current.left!=null){

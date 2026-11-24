@@ -12,6 +12,7 @@ public class Driver {
 		tree.insert(12);
 		tree.insert(8);
 		tree.insert(2);
+		tree.insert(3);
 		tree.insert(17);
 		tree.insert(7);
 		tree.insert(9);
@@ -30,7 +31,7 @@ public class Driver {
 		tree.postOrderTraversal(tree.root);
 		System.out.println();
         System.out.printf("Leaves: %d\n",tree.getLeaves());
-        System.out.printf("Search: %s\n",tree.search(15));
+        System.out.printf("Search: %s\n",tree.search(16));
         System.out.printf("Minimum Value: %d\n",tree.findMin());
         int deletedVal = deleteVal(tree);
         System.out.printf("Deleted Value: %d\n", deletedVal);
