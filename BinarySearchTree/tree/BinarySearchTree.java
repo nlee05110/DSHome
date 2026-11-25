@@ -49,9 +49,12 @@ public class BinarySearchTree {
         }
 		return null;
 	}
-	
 	//****** DELETE ***************************
 	public void delete(int key) {
+        if(this.root.key == key){
+            deleteRoot(this.root);
+            return;
+        }
 		delete(this.root,key); //Deleted this.root = 
 	}
 	
@@ -79,6 +82,25 @@ public class BinarySearchTree {
         }
 		return null;
 	}
+
+    public Node deleteRoot(Node root){
+       if(hasLeftChild(root)&&hasRightChild(root)){
+            Node temp = root.left;
+            this.root = this.root.right;
+            Node lowestLeftNode = lowestLeftNode(root.right); 
+            lowestLeftNode.left = temp; 
+
+        } else if(hasLeftChild(root)&&!hasRightChild(root)){
+            this.root = this.root.left;
+
+        } else if(!hasLeftChild(root)&&hasRightChild(root)){
+            this.root = this.root.left;
+        } else {
+            System.out.print("ERR: TREE IS EMPTY, PLEASE INSERT A NEW ROOT NODE OR EXIT THE PROGRAM");
+            return null;
+        }
+       return null;
+    }
 	
     public void deleteLeftChild(Node current) {
         
@@ -125,10 +147,31 @@ public class BinarySearchTree {
             return findMin(node.left);
         }
 	}
+
+    public int getHeight(){
+        height(this.root);
+        return height;
+    }
 	
 	//****** Height (Count in Nodes) ***************************
 	public int height(Node root) {
-    	return 0;
+        if(hasBothChildren(root)){
+            height+=1;
+            if(hasBothChildren(root.left)&&hasBothChildren(root.right)){
+                height+=1;
+                height(root.left);
+                height(root.right);
+            }
+            
+        }else if(hasLeftChild(root)&&!hasRightChild(root)){
+            height(root.left);
+            height+=1;
+        } else if(!hasLeftChild(root)&&hasRightChild(root)){
+            height(root.right);
+            height+=1;
+        }
+
+    	return height;
     }
     
     //****** Count Leaves ***************************
@@ -200,6 +243,20 @@ public class BinarySearchTree {
 
     public boolean hasRightChild(Node current){
         if(current.right!=null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasBothChildren(Node current){
+        if(hasLeftChild(current)&&hasRightChild(root)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEmpty(){
+        if(this.root!=null){
             return true;
         }
         return false;

@@ -23,13 +23,14 @@ public class Driver {
 		tree.insert(19);
 		tree.insert(14);
 		tree.insert(1);
-		
+
 		tree.inOrderTraversal(tree.root);
 		System.out.println();
 		tree.preOrderTraversal(tree.root);
 		System.out.println();
 		tree.postOrderTraversal(tree.root);
 		System.out.println();
+        System.out.printf("Height: %d\n", tree.getHeight());
         System.out.printf("Leaves: %d\n",tree.getLeaves());
         System.out.printf("Search: %s\n",tree.search(16));
         System.out.printf("Minimum Value: %d\n",tree.findMin());
