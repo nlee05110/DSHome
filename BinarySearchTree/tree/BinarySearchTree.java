@@ -199,7 +199,15 @@ public class BinarySearchTree {
 		// Left-Root-Right
 		if(root!=null) {
 			inOrderTraversal(root.left);
-			System.out.printf(" %d ", root.key);
+            if(hasChildren(root)&&hasRightChild(root)&&hasLeftChild(root)){
+			    System.out.printf("VAL: %d LEFT: %d RIGHT: %d\n", root.key, root.left.key, root.right.key);
+            }else if(hasRightChild(root)){
+			    System.out.printf("VAL: %d LEFT: NULL RIGHT: %d\n", root.key, root.right.key);
+            }else if(hasLeftChild(root)){
+			    System.out.printf("VAL: %d LEFT: %d RIGHT: NULL\n", root.key, root.left.key);
+            } else {
+			    System.out.printf("VAL: %d LEFT: NULL RIGHT: NULL\n", root.key);
+            }
 			inOrderTraversal(root.right);
 		}
 	}
@@ -266,8 +274,16 @@ public class BinarySearchTree {
 		// Left-Right-Root
 		if(root!=null) {
 			postOrderTraversal(root.left);
+            if(hasChildren(root)&&hasRightChild(root)&&hasLeftChild(root)){
+			    System.out.printf("VAL: %d LEFT: %d RIGHT: %d\n", root.key, root.left.key, root.right.key);
+            }else if(hasRightChild(root)){
+			    System.out.printf("VAL: %d LEFT: NULL RIGHT: %d\n", root.key, root.right.key);
+            }else if(hasLeftChild(root)){
+			    System.out.printf("VAL: %d LEFT: %d RIGHT: NULL\n", root.key, root.left.key);
+            } else {
+			    System.out.printf("VAL: %d LEFT: NULL RIGHT: NULL\n", root.key);
+            }
 			postOrderTraversal(root.right);
-			System.out.printf(" %d ", root.key);
 		}
 	}
 	
